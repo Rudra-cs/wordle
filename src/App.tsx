@@ -56,7 +56,7 @@ const App = () => {
                     className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 
                     mx-auto rounded-lg border border-gray-500 text-center"
                 >
-                    Game over
+                    Game Over!
                     <button
                         className="border block rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto"
                         onClick={() => {
