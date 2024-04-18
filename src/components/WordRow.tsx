@@ -49,7 +49,7 @@ function CharacterBox({ value, state }: CharacterBoxProps) {
 }
 
 const characterStateStyles = {
-    [LetterState.Miss]: "bg-gray-400 border-gray-400 ",
+    [LetterState.Miss]: "bg-gray-400 border-gray-400/50 ",
     [LetterState.Present]: "bg-yellow-400 border-yellow-400",
     [LetterState.Match]: "bg-green-500 border-green-500",
 };
