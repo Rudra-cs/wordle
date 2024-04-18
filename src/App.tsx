@@ -1,15 +1,39 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import WordRow from "./components/WordRow";
 import { useStore } from "./store/store";
-import { GUESS_LENGTH, LETTER_LENGTH } from "./utils/word-utils";
+import { GUESS_LENGTH, isValidWord, LETTER_LENGTH } from "./utils/word-utils";
 
 const App = () => {
     const state = useStore();
     const [guess, setGuess] = useGuess();
+    const addGuess = useStore((s) => s.addGuess);
+    const previousGuess = usePrevious(guess);
+    const [showInvalidGuess, setShowInvalidGuess] = useState(false);
+
+    useEffect(() => {
+        if (guess.length === 0 && previousGuess?.length === LETTER_LENGTH) {
+            if (isValidWord(previousGuess)) {
+                addGuess(previousGuess);
+                setShowInvalidGuess(false);
+            } else {
+                setShowInvalidGuess(true);
+                setGuess(previousGuess);
+            }
+        }
+    }, [addGuess, guess, previousGuess, setGuess]);
+
+    useEffect(() => {
+        let id: ReturnType<typeof setTimeout>;
+        if (showInvalidGuess === true) {
+            id = setTimeout(() => setShowInvalidGuess(false), 2000);
+        }
+        return () => clearTimeout(id);
+    }, [showInvalidGuess]);
 
     let rows = [...state.rows];
+    let currentRow = 0;
     if (rows.length < GUESS_LENGTH) {
-        rows.push({ guess });
+        currentRow = rows.push({ guess }) - 1;
     }
     const numberOfGuessRemaining = GUESS_LENGTH - rows.length;
     rows = rows.concat(Array(numberOfGuessRemaining).fill(""));
@@ -24,7 +48,18 @@ const App = () => {
 
             <main className="grid grid-rows-6 gap-2 ">
                 {rows.map(({ guess, result }, index) => (
-                    <WordRow key={index} letters={guess} result={result} />
+                    <WordRow
+                        key={index}
+                        letters={guess}
+                        result={result}
+                        className={`${
+                            showInvalidGuess && currentRow === index
+                                ? "animate-bounce"
+                                : ""
+                        }
+                                
+                        `}
+                    />
                 ))}
             </main>
 
@@ -51,9 +86,7 @@ const App = () => {
 };
 
 function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
-    const addGuess = useStore((s) => s.addGuess);
     const [guess, setGuess] = useState("");
-    const previousGuess = usePrevious(guess);
 
     const onKeyDown = (e: KeyboardEvent) => {
         const letter = e.key;
@@ -88,11 +121,6 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
         };
     });
 
-    useEffect(() => {
-        if (guess.length === 0 && previousGuess?.length === LETTER_LENGTH) {
-            addGuess(previousGuess);
-        }
-    }, [addGuess, guess, previousGuess]);
     return [guess, setGuess];
 }
 
