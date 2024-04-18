@@ -66,3 +66,5 @@ export const useStore = create<StoreState>()(
         )
     )
 );
+
+// useStore.persist.clearStorage();
