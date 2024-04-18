@@ -1,9 +1,7 @@
 import { useState } from "react";
 import WordRow from "./components/WordRow";
 import { useStore } from "./store/store";
-import { LETTER_LENGTH } from "./utils/word-utils";
-
-const GUESS_LENGTH = 6;
+import { GUESS_LENGTH, LETTER_LENGTH } from "./utils/word-utils";
 
 const App = () => {
     const state = useStore();
@@ -20,14 +18,14 @@ const App = () => {
         setGuess(newGuess);
     };
 
-    let rows = [...state.guesses];
+    let rows = [...state.rows];
     if (rows.length < GUESS_LENGTH) {
-        rows.push(guess);
+        rows.push({ guess });
     }
     const numberOfGuessRemaining = GUESS_LENGTH - rows.length;
     rows = rows.concat(Array(numberOfGuessRemaining).fill(""));
 
-    const isGameOver = state.guesses.length === GUESS_LENGTH;
+    const isGameOver = state.gameState != "playing";
 
     return (
         <div className="mx-auto w-96 relative">
@@ -45,8 +43,8 @@ const App = () => {
             </header>
 
             <main className="grid grid-rows-6 gap-2 ">
-                {rows.map((word, index) => (
-                    <WordRow key={index} letters={word} />
+                {rows.map(({ guess, result }, index) => (
+                    <WordRow key={index} letters={guess} result={result} />
                 ))}
             </main>
 

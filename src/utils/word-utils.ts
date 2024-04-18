@@ -3,6 +3,7 @@ import wordBank from "../word-bank.json";
 // const word = getRandomWord();
 
 export const LETTER_LENGTH = 5;
+export const GUESS_LENGTH = 6;
 
 export function getRandomWord() {
     const randomIndex = Math.floor(Math.random() * wordBank.length);
