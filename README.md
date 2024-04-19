@@ -13,7 +13,7 @@
     a wordle clone written in React, Typescript, Tailwind, and with tests using vitest!
     <br />
     <br />
-    <a href="">View Demo</a>
+    <a href="https://wordle-six-xi.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/Rudra-cs/wordle/issues">Report Bug</a>
     ·
