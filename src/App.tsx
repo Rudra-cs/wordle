@@ -44,10 +44,21 @@ const App = () => {
 
     return (
         <div className="mx-auto w-96 relative">
-            <header className="border-b border-gray-500 pb-2 mb-2">
+            <header className="border-b border-gray-500 pb-2 mb-2 flex justify-center items-center">
                 <h1 className="text-center text-5xl mt-3 font-mono font-bold">
                     Wordle
                 </h1>
+                <a href="https://github.com/Rudra-cs/wordle" target="_blank">
+                    <button className="bg-slate-900 dark:bg-gray-50 text-none text-slate-50 py-[13px] sm:px-2 px-0.5  rounded-lg inline-flex items-center transform hover:scale-105">
+                        <img
+                            className="h-6 w-10 pl-1 sm:pl-0 sm:w-6 hover:scale-120 transition ease-in-out "
+                            src={`githubDark.svg`}
+                        />
+                        <p className="font-medium hidden sm:block  text-medium dark:text-slate-900 dark:font-semibold ">
+                            GitHub
+                        </p>
+                    </button>
+                </a>
             </header>
 
             <main className="grid grid-rows-6 gap-2 ">
@@ -146,7 +157,7 @@ const App = () => {
                     </div>
                 </div>
             )}
-            <div className="w-full bg-slate-200 rounded-lg font-mono text-lg mt-10 flex flex-col justify-center items-center align-bottom bottom-0 select-none">
+            <div className="w-110 mb-2 bg-slate-200 rounded-lg font-mono text-lg mt-10 flex flex-col justify-center items-center align-bottom bottom-0 select-none">
                 Made with 🧠 by Rudra Behera.
             </div>
         </div>
