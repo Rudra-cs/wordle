@@ -18,11 +18,11 @@ const KeyBoard = ({
                 return (
                     <div
                         key={rowIndex}
-                        className="flex justify-center my-2 space-x-2 "
+                        className="flex justify-center my-2 space-x-2"
                     >
                         {keyboardRow.map((key, index) => {
                             let styles =
-                                "rounded  font-bold uppercase py-2 px-2 sm:px-4 flex-1 select-none";
+                                "rounded  font-bold uppercase py-2 px-2 sm:px-4 flex-1 select-none hover:scale-105";
                             const letterState =
                                 keyStateStyles[keyboardLetterState[key]];
 
@@ -60,9 +60,9 @@ const keyboardKeys = [
 ];
 
 const keyStateStyles = {
-    [LetterState.Miss]: " bg-gray-400 ",
-    [LetterState.Present]: " bg-yellow-400 ",
-    [LetterState.Match]: " bg-green-500 ",
+    [LetterState.Miss]: " bg-slate-400 ",
+    [LetterState.Present]: " bg-yellow-300 ",
+    [LetterState.Match]: " bg-green-400 ",
 };
 
 export default KeyBoard;

@@ -41,7 +41,8 @@ function CharacterBox({ value, state }: CharacterBoxProps) {
     return (
         <span
             className={`inline-block border-2 before:inline-block before:content-['_']
-         border-gray-500 p-4 uppercase font-bold text-2xl text-center rounded-lg ${stateStyles}`}
+         border-gray-500 p-4 uppercase font-bold text-2xl text-center rounded-lg ${stateStyles} hover:scale-105
+        `}
         >
             {value}
         </span>
@@ -49,7 +50,7 @@ function CharacterBox({ value, state }: CharacterBoxProps) {
 }
 
 const characterStateStyles = {
-    [LetterState.Miss]: "bg-gray-400 border-gray-400/50 ",
-    [LetterState.Present]: "bg-yellow-400 border-yellow-400",
-    [LetterState.Match]: "bg-green-500 border-green-500",
+    [LetterState.Miss]: "bg-slate-400 border-slate-400/50 ",
+    [LetterState.Present]: "bg-yellow-300 border-yellow-400/50",
+    [LetterState.Match]: "bg-green-500 border-green-500/50",
 };

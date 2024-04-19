@@ -92,6 +92,16 @@ const App = () => {
                 </div>
             )} */}
 
+            {showInvalidGuess && (
+                <div
+                    role="modal"
+                    className="absolute bg-slate-300 left-0 right-0 top-1/4 p-6 w-3/4 
+               mx-auto rounded-lg border border-slate-500 text-center font-mono text-lg"
+                >
+                    Invalid word!!
+                </div>
+            )}
+
             {isGameOver && (
                 <div
                     role="modal"
