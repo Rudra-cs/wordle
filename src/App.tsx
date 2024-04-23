@@ -43,47 +43,51 @@ const App = () => {
     const isGameOver = state.gameState != "playing";
 
     return (
-        <div className="mx-auto w-96 relative">
-            <header className="border-b border-gray-500 pb-2 mb-2 flex justify-center items-center">
-                <h1 className="text-center text-5xl mt-3 font-mono font-bold">
-                    Wordle
-                </h1>
-                <a href="https://github.com/Rudra-cs/wordle" target="_blank">
-                    <button className="bg-slate-900 dark:bg-gray-50 text-none text-slate-50 py-[13px] sm:px-2 px-0.5  rounded-lg inline-flex items-center transform hover:scale-105">
-                        <img
-                            className="h-6 w-10 pl-1 sm:pl-0 sm:w-6 hover:scale-120 transition ease-in-out "
-                            src={`githubDark.svg`}
-                        />
-                        <p className="font-medium hidden sm:block  text-medium dark:text-slate-900 dark:font-semibold ">
-                            GitHub
-                        </p>
-                    </button>
-                </a>
-            </header>
+        <div className="flex justify-center items-center px-2">
+            <div className="w-[350px] sm:w-96 relative">
+                <header className="border-b border-gray-500 pb-2 mb-2 flex justify-center items-center">
+                    <h1 className="text-center text-3xl sm:text-5xl mt-1 sm:mt-3 font-mono font-bold">
+                        Wordle
+                    </h1>
+                    <a
+                        href="https://github.com/Rudra-cs/wordle"
+                        target="_blank"
+                    >
+                        <button className="bg-slate-900 dark:bg-gray-50 text-none text-slate-50  sm:px-2 px-0.5  rounded-lg inline-flex items-center transform hover:scale-105">
+                            <img
+                                className="h-6 w-10 pl-1 sm:pl-0 sm:w-6 hover:scale-120 transition ease-in-out "
+                                src={`githubDark.svg`}
+                            />
+                            <p className="font-medium hidden sm:block  text-medium dark:text-slate-900 dark:font-semibold ">
+                                GitHub
+                            </p>
+                        </button>
+                    </a>
+                </header>
 
-            <main className="grid grid-rows-6 gap-2 ">
-                {rows.map(({ guess, result }, index) => (
-                    <WordRow
-                        key={index}
-                        letters={guess}
-                        result={result}
-                        className={`${
-                            showInvalidGuess && currentRow === index
-                                ? "animate-bounce"
-                                : ""
-                        }       
+                <main className="grid grid-rows-6 gap-2">
+                    {rows.map(({ guess, result }, index) => (
+                        <WordRow
+                            key={index}
+                            letters={guess}
+                            result={result}
+                            className={`${
+                                showInvalidGuess && currentRow === index
+                                    ? "animate-bounce"
+                                    : ""
+                            }       
                         `}
-                    />
-                ))}
-            </main>
+                        />
+                    ))}
+                </main>
 
-            <KeyBoard
-                onClick={(letter) => {
-                    addGuessLetter(letter);
-                }}
-            />
+                <KeyBoard
+                    onClick={(letter) => {
+                        addGuessLetter(letter);
+                    }}
+                />
 
-            {/* {isGameOver && (
+                {/* {isGameOver && (
                 <div
                     role="modal"
                     className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 
@@ -103,62 +107,63 @@ const App = () => {
                 </div>
             )} */}
 
-            {showInvalidGuess && (
-                <div
-                    role="modal"
-                    className="absolute bg-slate-300 left-0 right-0 top-1/4 p-6 w-3/4 
-               mx-auto rounded-lg border border-slate-500 text-center font-mono text-lg"
-                >
-                    Invalid word!!
-                </div>
-            )}
-
-            {isGameOver && (
-                <div
-                    role="modal"
-                    className={`fixed inset-0 z-10 flex items-center justify-center`}
-                    onClick={() => {
-                        // Close the modal when the background overlay is clicked
-                        state.newGame();
-                        setGuess("");
-                    }}
-                >
-                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                {showInvalidGuess && (
                     <div
-                        className="absolute bg-slate-200 p-6 w-1/2 mx-auto rounded-lg border border-gray-500 text-center font-mono text-xl"
-                        onClick={(e) => {
-                            e.stopPropagation(); // Prevent the click event from propagating to the parent div
+                        role="modal"
+                        className="absolute bg-slate-300 left-0 right-0 top-1/4 p-6 w-3/4 
+               mx-auto rounded-lg border border-slate-500 text-center font-mono text-lg"
+                    >
+                        Invalid word!!
+                    </div>
+                )}
+
+                {isGameOver && (
+                    <div
+                        role="modal"
+                        className={`fixed inset-0 z-10 flex items-center justify-center`}
+                        onClick={() => {
+                            // Close the modal when the background overlay is clicked
+                            state.newGame();
+                            setGuess("");
                         }}
                     >
-                        <div className="bg-slate-400 rounded-lg p-2">
-                            {state.gameState === "won"
-                                ? "You Won!!!🎉"
-                                : "You Lost~😝"}
-                            {state.gameState === "won" ? (
-                                <Fireworks
-                                    autorun={{ speed: 3, duration: 2000 }}
-                                />
-                            ) : (
-                                ""
-                            )}
-                        </div>
-                        <p className="mt-5">The answer was:</p>
-                        <WordRow className="" letters={state.answer} />
-
-                        <button
-                            className="border block rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto"
-                            onClick={() => {
-                                state.newGame();
-                                setGuess("");
+                        <div className="absolute inset-0 bg-black opacity-50"></div>
+                        <div
+                            className="absolute bg-slate-200 p-6 w-3/2 sm:w-1/2 mx-auto rounded-lg border border-gray-500 text-center font-mono text-xl"
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent the click event from propagating to the parent div
                             }}
                         >
-                            New Game
-                        </button>
+                            <div className="bg-slate-400 rounded-lg p-2">
+                                {state.gameState === "won"
+                                    ? "You Won!!!🎉"
+                                    : "You Lost~😝"}
+                                {state.gameState === "won" ? (
+                                    <Fireworks
+                                        autorun={{ speed: 3, duration: 2000 }}
+                                    />
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                            <p className="mt-5">The answer was:</p>
+                            <WordRow className="" letters={state.answer} />
+
+                            <button
+                                className="border block rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto"
+                                onClick={() => {
+                                    state.newGame();
+                                    setGuess("");
+                                }}
+                            >
+                                New Game
+                            </button>
+                        </div>
                     </div>
+                )}
+                <div className="w-110 mb-0 sm:mb-2 bg-slate-200 rounded-lg font-mono text-lg mt-2 md:mt-10 flex flex-col justify-center items-center align-bottom bottom-0 select-none">
+                    Made with 🧠 by Rudra Behera.
                 </div>
-            )}
-            <div className="w-110 mb-2 bg-slate-200 rounded-lg font-mono text-lg mt-10 flex flex-col justify-center items-center align-bottom bottom-0 select-none">
-                Made with 🧠 by Rudra Behera.
             </div>
         </div>
     );

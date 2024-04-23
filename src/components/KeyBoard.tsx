@@ -12,17 +12,18 @@ const KeyBoard = ({
         const letter = e.currentTarget.textContent;
         onClickProp(letter!);
     };
+
     return (
         <div className="flex flex-col mt-5 justify-center w-full">
             {keyboardKeys.map((keyboardRow, rowIndex) => {
                 return (
                     <div
                         key={rowIndex}
-                        className="flex justify-center my-2 space-x-2"
+                        className="flex justify-center my-1 space-x-2 "
                     >
                         {keyboardRow.map((key, index) => {
                             let styles =
-                                "rounded  font-bold uppercase py-2 px-2 sm:px-4 flex-1 select-none hover:scale-105";
+                                "rounded  font-bold uppercase py-2 px-2 text-xs sm:px-4 flex-1 select-none hover:scale-105";
                             const letterState =
                                 keyStateStyles[keyboardLetterState[key]];
 
@@ -55,7 +56,7 @@ const KeyBoard = ({
 
 const keyboardKeys = [
     ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-    ["", "a", "s", "d", "f", "g", "h", "j", "k", "l", ""],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
     ["Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"],
 ];
 

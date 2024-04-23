@@ -17,7 +17,9 @@ const WordRow = ({
         .concat(Array(lettersRemaining).fill(""));
 
     return (
-        <div className={`grid grid-cols-5 gap-2 ${className}`}>
+        <div
+            className={` grid grid-cols-5 gap-1 w-[250px] sm:w-full mx-auto sm:gap-2 ${className}`}
+        >
             {letters.map((char, index) => (
                 <CharacterBox
                     key={char + index}
@@ -41,7 +43,7 @@ function CharacterBox({ value, state }: CharacterBoxProps) {
     return (
         <span
             className={`inline-block border-2 before:inline-block before:content-['_']
-         border-gray-500 p-4 uppercase font-bold text-2xl text-center rounded-lg ${stateStyles} hover:scale-105
+         border-gray-500 px-1 py-1 sm:p-4 uppercase font-bold text-2xl text-center rounded-lg ${stateStyles} hover:scale-105
         `}
         >
             {value}
