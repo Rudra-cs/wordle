@@ -23,7 +23,7 @@ const KeyBoard = ({
                     >
                         {keyboardRow.map((key, index) => {
                             let styles =
-                                "rounded  font-bold uppercase py-2 px-2 text-xs sm:px-4 flex-1 select-none hover:scale-105";
+                                "rounded  font-bold uppercase py-2 px-2 text-xs sm:text-lg sm:px-4 flex-1 select-none hover:scale-105 dark:text-white";
                             const letterState =
                                 keyStateStyles[keyboardLetterState[key]];
 
@@ -34,7 +34,8 @@ const KeyBoard = ({
                             if (letterState) {
                                 styles += `${letterState}`;
                             } else if (key !== "") {
-                                styles += " bg-slate-200";
+                                styles +=
+                                    " bg-slate-200 dark:bg-[#656780] hover:bg-[#656890]";
                             }
 
                             return (
@@ -61,9 +62,9 @@ const keyboardKeys = [
 ];
 
 const keyStateStyles = {
-    [LetterState.Miss]: " bg-slate-400 ",
-    [LetterState.Present]: " bg-yellow-300 ",
-    [LetterState.Match]: " bg-green-400 ",
+    [LetterState.Miss]: " bg-slate-400 dark:bg-gray-800 ",
+    [LetterState.Present]: " bg-yellow-300 dark:bg-yellow-500/90",
+    [LetterState.Match]: " bg-green-400 dark:bg-green-600",
 };
 
 export default KeyBoard;
