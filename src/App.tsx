@@ -73,7 +73,10 @@ const App = () => {
                             <button
                                 className="bg-gray-200 ml-1 mt-1 sm:mt-3 dark:bg-zinc-800 px-4 py-[9px] justify-center
          items-center flex-none flex rounded-lg hover:scale-90 transition ease-out "
-                                onClick={toggleTheme}
+                                onClick={(e) => {
+                                    toggleTheme();
+                                    (e.target as HTMLButtonElement).blur();
+                                }}
                             >
                                 <img
                                     className="w-6 h-6 hover:scale-110 transition ease-out"
@@ -93,7 +96,7 @@ const App = () => {
                                         showInvalidGuess && currentRow === index
                                             ? "animate-bounce"
                                             : ""
-                                    }       
+                                    }    
                         `}
                                 />
                             ))}
