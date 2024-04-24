@@ -34,8 +34,7 @@ const KeyBoard = ({
                             if (letterState) {
                                 styles += `${letterState}`;
                             } else if (key !== "") {
-                                styles +=
-                                    " bg-slate-200 dark:bg-[#656780] hover:bg-[#656890]";
+                                styles += " bg-slate-200 dark:bg-[#656780]";
                             }
 
                             return (
