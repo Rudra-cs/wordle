@@ -48,7 +48,7 @@ const App = () => {
     const isGameOver = state.gameState != "playing";
 
     return (
-        <div className={`h-screen dark:bg-black ${theme}`}>
+        <div className={` overflow-hidden h-screen dark:bg-black ${theme}`}>
             <div className={`h-max dark:bg-black ${theme}`}>
                 <div
                     className={` flex flex-col justify-center items-center px-2 w-full`}
