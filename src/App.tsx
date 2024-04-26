@@ -5,6 +5,7 @@ import { GUESS_LENGTH, isValidWord, LETTER_LENGTH } from "./utils/word-utils";
 import KeyBoard from "./components/KeyBoard";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import useTheme from "./utils/theme-utils";
+import useWordMeaning from "./utils/word-meaning";
 
 const App = () => {
     const state = useStore();
@@ -13,6 +14,8 @@ const App = () => {
     const previousGuess = usePrevious(guess);
     const [showInvalidGuess, setShowInvalidGuess] = useState(false);
     const [theme, toggleTheme] = useTheme();
+    const [showHint, setShowHint] = useState(false);
+    const { meaning } = useWordMeaning(state.answer);
 
     const githubIcon = theme === "light" ? "githubLight" : "githubDark";
     const icon = theme === "light" ? "moon" : "sun";
@@ -83,6 +86,17 @@ const App = () => {
                                     src={`${icon}.svg`}
                                     alt="theme"
                                 />
+                            </button>
+
+                            <button
+                                className="bg-gray-200 ml-1 mt-1 sm:mt-3 font-mono dark:text-white dark:bg-zinc-800 px-4 py-[9px] justify-center
+         items-center flex-none flex rounded-lg hover:scale-95 transition ease-out "
+                                onClick={(e) => {
+                                    setShowHint(true);
+                                    (e.target as HTMLButtonElement).blur();
+                                }}
+                            >
+                                Hint 💡
                             </button>
                         </header>
 
@@ -186,6 +200,41 @@ const App = () => {
                                         }}
                                     >
                                         New Game
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {showHint && (
+                            <div
+                                role="modal"
+                                className={`fixed inset-0 z-10 flex items-center justify-center`}
+                                onClick={() => {
+                                    // Close the modal when the background overlay is clicked
+                                    setShowHint(false);
+                                }}
+                            >
+                                <div className="absolute inset-0 bg-black opacity-50"></div>
+                                <div
+                                    className="absolute bg-slate-200 dark:bg-slate-800 p-6 w-3/2 sm:w-1/2 mx-auto rounded-lg border border-gray-500 text-center font-mono text-xl"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent the click event from propagating to the parent div
+                                    }}
+                                >
+                                    <div className="w-20 flex justify-center items-center mx-auto mb-2 dark:text-white border dark:border-white border-black">
+                                        Hint
+                                    </div>
+                                    <div className="bg-slate-400 rounded-lg p-2">
+                                        {meaning}
+                                    </div>
+
+                                    <button
+                                        className="border block rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto"
+                                        onClick={() => {
+                                            setShowHint(false);
+                                        }}
+                                    >
+                                        Close
                                     </button>
                                 </div>
                             </div>
